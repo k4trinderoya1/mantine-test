@@ -1,0 +1,81 @@
+
+.panel {
+    overflow-x: hidden; 
+  }
+
+
+.fullscreenBackground {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+  
+  .overlay {
+    position: relative;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .subtitle {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    gap: 30px; 
+    justify-content: center;
+  }
+  
+  .actionButton {
+    background-color: #ff7f50;
+    color: white;
+    padding: 15px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .actionButton:hover {
+    background-color: #ff4500; 
+  }
+
+.mantine-Container-root {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    
+  }
+
+
+  .loadingScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .spinner {
+    width: 60px; /* Размер иконки */
+    height: 75px; /* Размер иконки */
+  }
+  
+  
+  
+  
+  

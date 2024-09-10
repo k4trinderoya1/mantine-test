@@ -9,4 +9,13 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './vitest.setup.mjs',
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000', // Порт 3306 на локальном сервере
+        changeOrigin: true,
+        secure: false, // Установите в true, если ваш сервер использует HTTPS
+      },
+    },
+  },
 });

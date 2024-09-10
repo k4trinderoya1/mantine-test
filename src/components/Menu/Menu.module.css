@@ -1,0 +1,47 @@
+
+
+  
+  .text {
+    margin-left: 8px;
+  }
+  
+  .rightSection {
+    margin-left: auto;
+  }
+  .button {
+    display: block;
+    margin: 50px auto;
+    background-color: #0e5f6d;
+    color: white;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #e0e0e0;
+  }
+  .label {
+    
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    margin: 4px 0;
+    
+  }
+
+  .dropdown {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    background-color: white;
+    border-radius: 4px;
+    padding: 8px;
+  }
+  .divider {
+    margin: 8px 0;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  

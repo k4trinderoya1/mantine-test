@@ -1,0 +1,41 @@
+/* Layout.module.css */
+.ratingPageBackground {
+  background-color: rgb(103, 82, 137);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuPageBackground {
+  background-color: rgb(141, 159, 104);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homePageBackground {
+  background-color: rgb(71, 136, 167);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.defaultBackground {
+  background-color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.galleryPageBackground {
+    background-color: #f0f0f0;
+  min-height: 100vh;
+}
+.debug-background {
+    border: 2px solid red; /* Временный стиль для отладки */
+  }
+  

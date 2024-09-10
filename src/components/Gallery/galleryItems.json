@@ -1,0 +1,45 @@
+[
+    {
+      "id": "item1",
+      "title": "Rafting Trips",
+      "image": "/images/raft.jpg",
+      "link": "/gallery/item1",
+      "icon": "/icons/iconRaft.svg"
+    },
+    {
+      "id": "item2",
+      "title": "Basecamping",
+      "image": "/images/basecamp.jpg",
+      "link": "/gallery/item2",
+      "icon": "/icons/iconBasecamp.svg"
+    },
+    {
+      "id": "item3",
+      "title": "Backpacking Trips",
+      "image": "/images/backp.jpg",
+      "link": "/gallery/item3",
+      "icon": "/icons/iconBackp.svg"
+    },
+    {
+      "id": "item4",
+      "title": "Canoe Trips",
+      "image": "/images/canoe.jpg",
+      "link": "/gallery/item4",
+      "icon": "/icons/iconCanoe.svg"
+    },
+    {
+      "id": "item5",
+      "title": "Photography Trips",
+      "image": "/images/photo.jpg",
+      "link": "/gallery/item5",
+      "icon": "/icons/iconPhoto.svg"
+    },
+    {
+      "id": "item6",
+      "title": "Custom Trips",
+      "image": "/images/custom.jpg",
+      "link": "/gallery/item6",
+      "icon": "/icons/iconCustom.svg"
+    }
+  ]
+  

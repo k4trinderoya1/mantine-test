@@ -1,0 +1,26 @@
+/* Navigation.module.css */
+.navContainer {
+  background-color: #282c34; 
+  padding: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  gap: 20px; 
+}
+
+.active {
+  text-decoration: none;
+  color: rgb(255, 247, 0); 
+}
+
+.navLink {
+  text-decoration: none;
+  color: white; 
+  font-size: 18px; 
+  transition: color 0.3s; 
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  color: #61dafb; 
+}
