@@ -1,16 +1,42 @@
 import { MenuDropdown } from '@/components/Menu/MenuDropdown';
 import { Menu, Button, Text, rem } from '@mantine/core';
 import { IconArrowsLeftRight, IconMessageCircle, IconPhoto, IconSearch, IconSettings, IconTrash } from '@tabler/icons-react';
+import React, { useState, useEffect } from 'react';
 import classes from '../components/Menu/Menu.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
+import styles from '../components/Menu/Menu.module.css';
 
 export function MenuPage() {
+  const location = useLocation();
+  const [transitionStage, setTransitionStage] = useState('fadeIn');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false); // Эмулируем завершение загрузки
+    setTransitionStage('fadeOut');
+  }, [location.pathname]);
+
+  if (loading) {
     return (
+      <div className={`${styles.pageTransition} ${styles[transitionStage]}`}>
+        Загрузка...
+      </div>
+    );
+  }
+    return (
+      <div
+      className={`${styles.pageTransition} ${styles[transitionStage]}`}
+      onAnimationEnd={() => {
+        if (transitionStage === 'fadeOut') {
+          setTransitionStage('fadeIn');
+        }
+      }}
+    >
         <Menu shadow="md" width={200}>
         <Menu.Target>
           <Button className={classes.button}>Toggle menu</Button>
         </Menu.Target>
-  
+
         <Menu.Dropdown>
           <Menu.Label>Application</Menu.Label>
           <Menu.Item leftSection={<IconSettings style={{ width: rem(14), height: rem(14) }} />}>
@@ -34,9 +60,9 @@ export function MenuPage() {
           >
             Search
           </Menu.Item>
-  
+
           <Menu.Divider />
-  
+
           <Menu.Label>Danger zone</Menu.Label>
           <Menu.Item
             leftSection={<IconArrowsLeftRight style={{ width: rem(14), height: rem(14) }} />}
@@ -51,5 +77,6 @@ export function MenuPage() {
           </Menu.Item>
         </Menu.Dropdown>
       </Menu>
-    );
+    </div>
+  );
 }

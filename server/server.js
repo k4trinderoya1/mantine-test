@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 app.get('/api/gallery-items', async (req, res) => {
-  await delay(1000); // Задержка в 1 секунду
+  await delay(0); // Задержка в 1 секунду
   try {
     res.json(galleryFeatures);
   } catch (error) {
@@ -27,10 +27,10 @@ app.get('/api/gallery-items', async (req, res) => {
 });
 app.get('/api/gallery-gal', async (req, res) => {
   console.log('Запрос на /api/gallery-gal');
-  await delay(1000);
+  await delay(0);
   try {
-    console.log('Отправка данных:', galleryItems); // Check if data is logged here
-    res.json(galleryItems);
+    console.log('Отправка данных:', galleryFeatures);
+    res.json(galleryFeatures);
   } catch (error) {
     console.error('Ошибка при отправке данных:', error);
     res.status(500).json({ error: 'Ошибка сервера' });

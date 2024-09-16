@@ -1,0 +1,85 @@
+[{"id": "item1",
+    "title": "Rafting",
+    "image": "/images/raft1.jpg",
+    "buttons": [
+        {
+          "label": "Action Button 1",
+          "style": "primary"
+        },
+        {
+          "label": "Action Button 2",
+          "style": "secondary"
+        }
+      ]
+  },
+{"id": "item2",
+    "title": "Basecamping",
+    "image": "/images/base2.jpg",
+    "buttons": [
+        {
+          "label": "Action Button 1",
+          "style": "primary"
+        },
+        {
+          "label": "Action Button 2",
+          "style": "secondary"
+        }
+      ]
+  },
+{"id": "item3",
+    "title": "Backpacking",
+    "image": "/images/backp3.jpg",
+    "buttons": [
+        {
+          "label": "Action Button 1",
+          "style": "primary"
+        },
+        {
+          "label": "Action Button 2",
+          "style": "secondary"
+        }
+      ]
+  },
+{"id": "item4",
+    "title": "Canoe Trips",
+    "image": "/images/canoe4.jpg",
+    "buttons": [
+        {
+          "label": "Action Button 1",
+          "style": "primary"
+        },
+        {
+          "label": "Action Button 2",
+          "style": "secondary"
+        }
+      ]
+  },
+{"id": "item5",
+    "title": "Photography Trips",
+    "image": "/images/photo5.jpg",
+    "buttons": [
+        {
+          "label": "Action Button 1",
+          "style": "primary"
+        },
+        {
+          "label": "Action Button 2",
+          "style": "secondary"
+        }
+      ]
+  },
+{"id": "item6",
+    "title": "Custom Trips",
+    "image": "/images/custom6.jpg",
+    "buttons": [
+        {
+          "label": "Action Button 1",
+          "style": "primary"
+        },
+        {
+          "label": "Action Button 2",
+          "style": "secondary"
+        }
+      ]
+  }
+]

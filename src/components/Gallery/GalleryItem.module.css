@@ -62,20 +62,34 @@
   }
 
 
-  .loadingScreen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+  .fadeIn {
+    animation: 0.5s fadeIn forwards;
   }
   
-  .spinner {
-    width: 60px; /* Размер иконки */
-    height: 75px; /* Размер иконки */
+  .fadeOut {
+    animation: 0.5s fadeOut forwards;
   }
   
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0px, 0px);
+    }
+  }
   
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translate(0px, 0px);
+    }
+    to {
+      transform: translate(-20px, 0);
+      opacity: 0;
+    }
+  }
   
-  
-  
+

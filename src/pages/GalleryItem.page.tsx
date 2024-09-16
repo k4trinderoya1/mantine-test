@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import styles from '../components/Gallery/GalleryItem.module.css';
 import GalleryItemContent from '../components/Gallery/GalleryItem';
 import { GalleryItem } from '../components/Gallery/GalleryItem';
-import hourglassGif from '../assets/GIFhourglass.gif';
 
 const GalleryItemPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const location = useLocation();
   const [galleryItem, setGalleryItem] = useState<GalleryItem | null>(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [transitionStage, setTransitionStage] = useState('fadeIn');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Первый запрос к /api/gallery-items для galleryFeatures.json
-        setLoading(true);
         const featuresResponse = await fetch('http://localhost:5000/api/gallery-items', {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         });
 
         if (!featuresResponse.ok) {
@@ -32,16 +28,12 @@ const GalleryItemPage: React.FC = () => {
 
         if (foundFeatureItem) {
           setGalleryItem(foundFeatureItem);
-          setLoading(false);
-          return; // Если элемент найден, прекращаем дальнейший поиск
+          return;
         }
 
-        // Второй запрос к /api/gallery-gal для galeryItems.json
         const galResponse = await fetch('http://localhost:5000/api/gallery-gal', {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         });
 
         if (!galResponse.ok) {
@@ -52,43 +44,45 @@ const GalleryItemPage: React.FC = () => {
         const foundGalItem = galData.find((item) => item.id === id);
 
         setGalleryItem(foundGalItem || null);
-        setLoading(false);
       } catch (error: any) {
         console.error('Error fetching data:', error);
         setError(error.message || 'Неизвестная ошибка');
-        setLoading(false);
       }
     };
 
     fetchData();
   }, [id]);
 
-  if (loading) {
-    return (
-      <div className={styles.loadingScreen}>
-        <img src={hourglassGif} alt="Loading" className={styles.spinner} />
-        <p>Загрузка...</p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    setTransitionStage('fadeOut');
+  }, [location.pathname]);
 
+  const handleAnimationEnd = () => {
+    if (transitionStage === 'fadeOut') {
+      setTransitionStage('fadeIn');
+    }
+  };
+
+  // Если произошла ошибка, отображаем сообщение
   if (error) {
     return <div>Ошибка: {error}</div>;
   }
 
-  if (!galleryItem) {
-    return <div>Элемент не найден</div>;
-  }
-
-  const actionButtons = galleryItem.buttons.map((button: { label: string; style: string }) => ({
+  const actionButtons = galleryItem?.buttons.map((button: { label: string; style: string }) => ({
     label: button.label,
     onClick: () => alert(`${button.label} triggered`),
     className: styles[button.style] || styles.defaultButton,
-  }));
+  })) || [];
 
   return (
-    <div className={styles.panel}>
-      <GalleryItemContent galleryItem={galleryItem} actionButtons={actionButtons} />
+    <div className={`${styles.pageTransition} ${styles[transitionStage]}`} onAnimationEnd={handleAnimationEnd}>
+      <div className={styles.panel}>
+        {galleryItem ? (
+          <GalleryItemContent galleryItem={galleryItem} actionButtons={actionButtons} />
+        ) : (
+          <div/>
+        )}
+      </div>
     </div>
   );
 };
