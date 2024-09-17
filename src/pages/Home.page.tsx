@@ -6,35 +6,32 @@ import styles from '../components/Welcome/Welcome.module.css';
 
 export function HomePage() {
   const location = useLocation();
-  const [transitionStage, setTransitionStage] = useState('fadeIn');
+  const [transitionStage, setTransitionStage] = useState('hidden'); // Начальное состояние скрытые элементы
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(false); // Эмулируем завершение загрузки
-    setTransitionStage('fadeOut');
+    // Эмулируем загрузку данных
+    setLoading(true);
+    setTransitionStage('hidden');
+
+    const timeout = setTimeout(() => {
+      setLoading(false);
+      setTransitionStage('fadeIn'); // После завершения загрузки плавное появление
+    }, 1000); // Задержка 1 секунда для примера
+
+    return () => clearTimeout(timeout);
   }, [location.pathname]);
 
-  if (loading) {
-    return (
-      <div className={`${styles.pageTransition} ${styles[transitionStage]}`}>
-        Загрузка...
-      </div>
-    );
-  }
-
   return (
-    <div
-      className={`${styles.pageTransition} ${styles[transitionStage]}`}
-      onAnimationEnd={() => {
-        if (transitionStage === 'fadeOut') {
-          setTransitionStage('fadeIn');
-        }
-      }}
-    >
-    
-      <Welcome />
-      <ColorSchemeToggle />
-
+    <div className={styles.pageBackground}> {/* Фон отображается сразу */}
+      <div className={`${styles.pageTransition} ${styles[transitionStage]}`}>
+        {!loading && (
+          <>
+            <Welcome />
+            <ColorSchemeToggle />
+          </>
+        )}
+      </div>
     </div>
   );
 }
