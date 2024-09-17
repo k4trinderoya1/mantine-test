@@ -16,7 +16,7 @@
 }
 
 .homePageBackground {
-  background-color: rgb(71, 136, 167);
+  background-color: rgb(58, 117, 144);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -50,4 +50,40 @@
   .fadeOut {
     opacity: 1;
   }
+
+  /* Темные версии фонов */
+.ratingPageBackgroundDark {
+  background-color: rgb(47, 35, 66);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuPageBackgroundDark {
+  background-color: rgb(64, 85, 22);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homePageBackgroundDark {
+  background-color: rgb(5, 67, 105);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.galleryPageBackgroundDark {
+  background-color: rgb(100, 100, 100);
+
+}
+
+.defaultBackgroundDark {
+  background-color: #1a1a1a;
+
+}
+
   
