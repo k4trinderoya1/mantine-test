@@ -19,7 +19,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@test-utils": ["./test-utils"]
-    }
+    },
+
   },
-  "include": ["src", "test-utils"]
+  "include": ["src", "test-utils", "server/importJson.js"]
 }

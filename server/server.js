@@ -5,7 +5,7 @@ const galleryItems = require('./galleryItems.json');
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const port = 5000; // Порт, который вы используете
+const port = 5000; 
 
 app.use(cors());
 app.use(express.json());
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 app.get('/api/gallery-items', async (req, res) => {
-  await delay(0); // Задержка в 1 секунду
+  await delay(0); 
   try {
     res.json(galleryFeatures);
   } catch (error) {
