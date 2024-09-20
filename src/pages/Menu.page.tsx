@@ -1,17 +1,14 @@
-import { useEffect, useState,useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Group, Text, Button } from '@mantine/core';
-import { IconUpload, IconX, IconPhoto } from '@tabler/icons-react';
-import { rem } from '@mantine/core';
 import styles from '../components/Menu/Menu.module.css';
-import { Dropzone,DropzoneProps } from '@mantine/Dropzone';
-import { IMAGE_MIME_TYPE, FileWithPath, FileRejection } from '@mantine/Dropzone';
 
-export function MenuPage(props: Partial<DropzoneProps>) {
+export function MenuPage(props: any) {
   const location = useLocation();
   const [transitionStage, setTransitionStage] = useState('hidden');
   const [loading, setLoading] = useState(true);
-  const openRef = useRef<() => void>(null as any);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const openRef = useRef<HTMLInputElement | null>(null);
+  const dropzoneRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setLoading(true);
@@ -25,6 +22,57 @@ export function MenuPage(props: Partial<DropzoneProps>) {
     return () => clearTimeout(timeout);
   }, [location.pathname]);
 
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const files = Array.from(event.dataTransfer.files);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
+
+    if (dropzoneRef.current) {
+      dropzoneRef.current.classList.remove(styles.dragOver);
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (dropzoneRef.current) {
+      dropzoneRef.current.classList.add(styles.dragOver);
+    }
+  };
+
+  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    if (dropzoneRef.current) {
+      dropzoneRef.current.classList.remove(styles.dragOver);
+    }
+  };
+
+  const handleClick = () => {
+    if (openRef.current) {
+      openRef.current.click();
+    }
+  };
+
+  const handleFilesSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files ? Array.from(event.target.files) : [];
+    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
+  };
+
+  const renderPreviews = () => {
+    return selectedFiles.map((file, index) => (
+      <div key={index} className={styles.imagePreviewWrapper}>
+        <img
+          src={URL.createObjectURL(file)}
+          alt={file.name}
+          className={styles.imagePreview}
+        />
+        <div className={styles.hoverEffect}>
+          <p>{file.name}</p>
+          <p>Click to change</p>
+        </div>
+      </div>
+    ));
+  };
+
   return (
     <div className={styles.pageBackground}>
       <div
@@ -37,52 +85,42 @@ export function MenuPage(props: Partial<DropzoneProps>) {
       >
         {!loading && (
           <>
-            <div className={styles.formGroup}>
-              <input type="text" className={styles.input} placeholder=" " />
-              <label className={styles.label}>Search</label>
+            <div
+              className={`${styles.dropzone} ${selectedFiles.length > 0 ? styles.dropzoneWithPreview : ''}`}
+              ref={dropzoneRef}
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onClick={handleClick}
+            >
+              <input
+                type="file"
+                ref={openRef}
+                style={{ display: 'none' }}
+                multiple 
+                accept="image/*"
+                onChange={handleFilesSelected}
+              />
+              {selectedFiles.length === 0 ? (
+                <div>
+                  <div className={styles.dropzoneIcon}>
+                    <div className="iconUpload" />
+                  </div>
+                  <div>
+                    <p className="text-xl">Drag images here or click to select files</p>
+                    <p className="text-sm text-dimmed">Files should not exceed 5mb each</p>
+                  </div>
+                </div>
+              ) : (
+                <div className={styles.previewsContainer}>
+                  {renderPreviews()}
+                </div>
+              )}
             </div>
 
-            <Dropzone
-              onDrop={(files: FileWithPath[]) => console.log('accepted files', files)}
-              onReject={(fileRejections: FileRejection[]) => console.log('rejected files', fileRejections)}
-              maxSize={5 * 1024 ** 2}
-              accept={IMAGE_MIME_TYPE}
-              openRef={openRef} 
-              {...props}
-            >
-              <Group justify="center" gap="xl" mih={220} style={{ pointerEvents: 'none' }}>
-                <Dropzone.Accept>
-                  <IconUpload
-                    style={{ width: rem(52), height: rem(52), color: 'var(--mantine-color-blue-6)' }}
-                    stroke={1.5}
-                  />
-                </Dropzone.Accept>
-                <Dropzone.Reject>
-                  <IconX
-                    style={{ width: rem(52), height: rem(52), color: 'var(--mantine-color-red-6)' }}
-                    stroke={1.5}
-                  />
-                </Dropzone.Reject>
-                <Dropzone.Idle>
-                  <IconPhoto
-                    style={{ width: rem(52), height: rem(52), color: 'var(--mantine-color-dimmed)' }}
-                    stroke={1.5}
-                  />
-                </Dropzone.Idle>
-
-                <div>
-                  <Text size="xl" inline>
-                    Drag images here or click to select files
-                  </Text>
-                  <Text size="sm" c="dimmed" inline mt={7}>
-                    Attach as many files as you like, each file should not exceed 5mb
-                  </Text>
-                </div>
-              </Group>
-            </Dropzone>
-            <Group justify="center" mt="md">
-              <Button onClick={() => openRef.current?.()}>Select files</Button>
-            </Group>
+            <div className={styles.buttonContainer}>
+              <button onClick={handleClick}>Select more files</button>
+            </div>
           </>
         )}
       </div>
