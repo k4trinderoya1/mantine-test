@@ -46,24 +46,6 @@
   transition: opacity 0.5s ease-in-out;
 }
 
-.dropzone {
-  width: 400px;
-  min-height: 200px;
-  background-color: rgba(147, 136, 136, 0.373);
-  border: 2px dashed #ccc;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  transition: background-color 0.3s ease;
-  position: relative;
-  opacity: 1;
-  cursor: pointer;
-}
-
 .dropzone:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
@@ -84,11 +66,13 @@
 .buttonContainer {
   margin-top: 20px;
   display: flex;
+  gap: 20px;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-button {
+.selectButton {
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -96,9 +80,42 @@ button {
   border-radius: 5px;
   cursor: pointer;
 }
-
-button:hover {
+.deleteButton {
+  padding: 10px 20px;
+  background-color: #dc3545; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.selectButton:hover {
   background-color: #0056b3;
+}
+
+
+.deleteButton:hover {
+  background-color: #8f1a25; 
+}
+
+.removeButton {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: rgb(183, 25, 25);
+  color: white;
+  border: none;
+  border-radius: 35%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto; 
+}
+
+.removeButton:hover {
+  background-color: darkred;
 }
 
 
@@ -118,36 +135,60 @@ button:hover {
   text-align: center;
 }
 
+
 .imagePreviewWrapper:hover .hoverEffect {
-  opacity: 0.5;
+  display: block;
 }
 
 .dropzoneWithPreview {
-  width: 100%;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Автоматическое заполнение с минимальной шириной */
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  background-color: #5e5e5e7d;
+  width: fit-content; 
+  max-width: 100%; 
+}
+
+.dropzone {
+  width: 100%;
+  min-height: 200px; 
+  flex-wrap: wrap;
+  background-color: rgba(147, 136, 136, 0.373);
+  border: 2px dashed #ccc;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+  position: relative;
+  opacity: 1;
+  cursor: pointer;
 }
 
 .imagePreviewWrapper {
-  width: 100%;
   position: relative;
-  aspect-ratio: 1 / 1; 
-  overflow: hidden;
+  margin: 5px;
+  width: 100px; 
+  height: 100px; 
+  object-fit: cover;
+  pointer-events: none; 
+
 }
 
 .imagePreview {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
-  border-radius: 10px;
+  border-radius: 15%;
+  object-fit: cover;
+  pointer-events: none; 
 }
-
 .previewsContainer {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  justify-content: flex-start; 
+  object-fit: cover;
+  pointer-events: none; 
 }

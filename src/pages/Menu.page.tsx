@@ -6,7 +6,7 @@ export function MenuPage(props: any) {
   const location = useLocation();
   const [transitionStage, setTransitionStage] = useState('hidden');
   const [loading, setLoading] = useState(true);
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]); 
   const openRef = useRef<HTMLInputElement | null>(null);
   const dropzoneRef = useRef<HTMLDivElement | null>(null);
 
@@ -24,8 +24,8 @@ export function MenuPage(props: any) {
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const files = Array.from(event.dataTransfer.files);
-    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
+    const files = Array.from(event.dataTransfer.files); 
+    setSelectedFiles((prevFiles) => [...prevFiles, ...files]); 
 
     if (dropzoneRef.current) {
       dropzoneRef.current.classList.remove(styles.dragOver);
@@ -52,14 +52,25 @@ export function MenuPage(props: any) {
     }
   };
 
+  const handleDelete = () => {
+    setSelectedFiles([]); 
+  };
+
   const handleFilesSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files ? Array.from(event.target.files) : [];
-    setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
+    setSelectedFiles((prevFiles) => [...prevFiles, ...files]); 
+  };
+  const handleRemoveFile = (index: number) => {
+    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
   const renderPreviews = () => {
     return selectedFiles.map((file, index) => (
-      <div key={index} className={styles.imagePreviewWrapper}>
+      <div
+        key={index}
+        className={styles.imagePreviewWrapper}
+        onClick={(e) => e.stopPropagation()}
+      >
         <img
           src={URL.createObjectURL(file)}
           alt={file.name}
@@ -67,9 +78,17 @@ export function MenuPage(props: any) {
         />
         <div className={styles.hoverEffect}>
           <p>{file.name}</p>
-          <p>Click to change</p>
+
         </div>
+        {}
+        <button
+          className={styles.removeButton}
+          onClick={() => handleRemoveFile(index)}
+        >
+          &times;
+        </button>
       </div>
+      
     ));
   };
 
@@ -108,7 +127,9 @@ export function MenuPage(props: any) {
                   </div>
                   <div>
                     <p className="text-xl">Drag images here or click to select files</p>
-                    <p className="text-sm text-dimmed">Files should not exceed 5mb each</p>
+                    <p className="text-sm text-dimmed">
+                      Files should not exceed 5mb each
+                    </p>
                   </div>
                 </div>
               ) : (
@@ -119,8 +140,10 @@ export function MenuPage(props: any) {
             </div>
 
             <div className={styles.buttonContainer}>
-              <button onClick={handleClick}>Select more files</button>
+              <button onClick={handleClick}className={styles.selectButton}>Select more files</button>
+              <button onClick={handleDelete} className={styles.deleteButton}>Delete all files</button>
             </div>
+
           </>
         )}
       </div>
