@@ -6,6 +6,7 @@ import { GalleryPage } from './pages/Gallery.page';
 import GalleryItemPage from './pages/GalleryItem.page';
 import { Layout } from './components/Layout';
 import styles from './components/Layout.module.css';
+import '../public/chatbot/chatbot/chatbot.css';
 
 import { Container } from '@mantine/core';
 

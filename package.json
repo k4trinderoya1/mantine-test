@@ -19,6 +19,7 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^4.5.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mantine/core": "7.12.2",

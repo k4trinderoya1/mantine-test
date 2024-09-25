@@ -67,7 +67,7 @@ export function MenuPage(props: any) {
   const renderPreviews = () => {
     return selectedFiles.map((file, index) => (
       <div
-        key={index}
+        key={file.name}
         className={styles.imagePreviewWrapper}
         onClick={(e) => e.stopPropagation()}
       >
@@ -77,8 +77,6 @@ export function MenuPage(props: any) {
           className={styles.imagePreview}
         />
         <div className={styles.hoverEffect}>
-          <p>{file.name}</p>
-
         </div>
         {}
         <button

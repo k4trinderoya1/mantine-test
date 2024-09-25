@@ -8,9 +8,62 @@
       content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
     />
     <title>Vite + Mantine App</title>
+    <!-- Подключение стилей для чат-бота -->
+    <link rel="stylesheet" href="./chatbot/chatbot/chatbot.css">
   </head>
   <body>
     <div id="root"></div>
+    <!-- Элементы для чат-бота -->
+    <div class="chatbot__btn">
+      <div class="chatbot__tooltip d-none">Есть вопрос?</div>
+    </div>
+    
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- FingerPrint JS -->
+    <script src="./chatbot/chatbot/fp2.js"></script>
+    <!-- ChatBot JS -->
+    <script src="./chatbot/chatbot/chatbot.js"></script>
+
+    <script>
+      // Конфигурация чат-бота
+      const configChatbot = {
+        btn: '.chatbot__btn',
+        key: 'fingerprint',
+        replicas: './chatbot/data/data-1.json',
+        root: SimpleChatbot.createTemplate(),
+        url: './chatbot/chatbot/chatbot.php',
+      };
+  
+      let chatbot = null;
+      let fingerprint = localStorage.getItem(configChatbot.key);
+      if (!fingerprint) {
+        Fingerprint2.get((components) => {
+          fingerprint = Fingerprint2.x64hash128(components.map((pair) => pair.value).join(), 31);
+          localStorage.setItem(configChatbot.key, fingerprint);
+        });
+      }
+  
+      document.querySelector(configChatbot.btn).onclick = function () {
+        this.classList.add('d-none');
+        configChatbot.root.classList.toggle('chatbot_hidden');
+        if (chatbot) return;
+  
+        const request = new XMLHttpRequest();
+        request.open('GET', configChatbot.replicas, true);
+        request.responseType = 'json';
+        request.onload = function () {
+          if (request.status === 200) {
+            const data = request.response;
+            configChatbot.replicas = typeof data === 'string' ? JSON.parse(data) : data;
+            chatbot = new SimpleChatbot(configChatbot);
+            chatbot.init();
+          } else {
+            console.log(request.status, request.response);
+          }
+        };
+        request.send();
+      };
+    </script>
   </body>
 </html>
