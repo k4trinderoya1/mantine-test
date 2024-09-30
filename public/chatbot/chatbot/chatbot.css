@@ -177,7 +177,11 @@
   text-align: left;
 }
 
-/* Кнопки в сообщениях */
+.chatbot__footer {
+  padding: 0.75rem;
+  position: relative;
+}
+
 .btn {
   width: 100%;
   margin: 0;
@@ -190,6 +194,7 @@
   color: #212529;
   text-align: left;
   vertical-align: middle;
+  user-select: none;
   background-color: #fff9c8;
   border: 1px solid transparent;
   padding: 0.5rem 0.75rem;
@@ -208,6 +213,7 @@
   outline: 0;
 }
 
+
 .chatbot__content .btn {
   margin-bottom: 0.4rem;
 }
@@ -215,7 +221,12 @@
 /* Footer и ввод сообщения */
 .chatbot__footer {
   padding: 0.75rem;
-  position: relative;
+  position: fixed;
+  bottom: 0; /* Прикрепить к низу */
+  left: 0; /* Прикрепить к левому краю */
+  width: 100%; /* Ширина на всю ширину родителя */
+  background-color: #fafafa; /* Цвет фона футера */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Легкая тень для футера */
 }
 
 /* Поле ввода */
@@ -225,7 +236,7 @@
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  width: 100%;
+  width: calc(100% - 36px); /* Ширина на всю ширину, минус отступы */
   height: 40px;
   padding: 4px 36px 4px 10px;
   font-weight: 400;
@@ -235,10 +246,43 @@
   border: 1px solid #e0e0e0;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  position: relative; /* Относительное позиционирование для правильного наложения */
+
 }
 
+/* Close Button */
+.chatbot__close {
+  width: 20px;
+  height: 20px;
+  margin-right: 1rem;
+  background: transparent no-repeat center center;
+  background-size: 100% 100%;
+  cursor: pointer;
+  opacity: 0.8;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23fff' d='M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.chatbot__close:hover {
+  opacity: 1;
+}
+
+/* Reset Button */
+.chatbot__reset {
+  width: 20px;
+  margin-left: auto;
+  height: 20px;
+  background: transparent no-repeat center center;
+  background-size: 100% 100%;
+  cursor: pointer;
+  opacity: 0.8;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23fff' d='M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.chatbot__reset:hover {
+  opacity: 1;
+}
 .chatbot__input:disabled {
-  background-color: #fafafa;
+  background-color: #9c9595;
 }
 
 .chatbot__input:focus {
