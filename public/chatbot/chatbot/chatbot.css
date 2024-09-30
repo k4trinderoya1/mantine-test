@@ -94,50 +94,27 @@
   }
 }
 
+/* Заголовок чатбота */
 .chatbot__title {
   background-color: #4b5a4ca5;
   color: #fff;
   padding: 1rem;
   display: flex;
   font-weight: bold;
+  position: fixed;
+  top: 60px;  /* Высота навбара */
+  left: 0;
+  width: 100%;
+  z-index: 110;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.chatbot__close {
-  width: 20px;
-  height: 20px;
-  margin-right: 1rem;
-  background: transparent no-repeat center center;
-  background-size: 100% 100%;
-  cursor: pointer;
-  opacity: 0.8;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23fff' d='M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z'%3E%3C/path%3E%3C/svg%3E");
-}
-
-.chatbot__close:hover {
-  opacity: 1;
-}
-
-.chatbot__reset {
-  width: 20px;
-  margin-left: auto;
-  height: 20px;
-  background: transparent no-repeat center center;
-  background-size: 100% 100%;
-  cursor: pointer;
-  opacity: 0.8;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23fff' d='M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z'%3E%3C/path%3E%3C/svg%3E");
-}
-
-.chatbot__reset:hover {
-  opacity: 1;
-}
-
+/* Контейнер для содержимого */
 .chatbot__wrapper {
   display: flex;
-  -ms-flex: 1 0 auto;
-  flex: 1 0 0%;
   flex-direction: column;
   overflow-y: auto;
+  padding-top: 120px; /* Отступ для зафиксированного заголовка */
 }
 
 .chatbot__items {
@@ -165,6 +142,7 @@
   }
 }
 
+/* Контент сообщений */
 .chatbot__content {
   width: 70%;
   padding: 0.5rem 0.75rem;
@@ -173,14 +151,14 @@
   animation-timing-function: ease-in-out;
 }
 
-/* bot */
+/* Сообщения от бота */
 .chatbot__content_bot {
   color: #212529;
   background: #eaeaea;
   border-radius: 0.5rem;
 }
 
-/* human */
+/* Сообщения от человека */
 .chatbot__item_human {
   justify-content: flex-end;
 }
@@ -199,7 +177,7 @@
   text-align: left;
 }
 
-/* btn */
+/* Кнопки в сообщениях */
 .btn {
   width: 100%;
   margin: 0;
@@ -212,10 +190,6 @@
   color: #212529;
   text-align: left;
   vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   background-color: #fff9c8;
   border: 1px solid transparent;
   padding: 0.5rem 0.75rem;
@@ -238,16 +212,13 @@
   margin-bottom: 0.4rem;
 }
 
+/* Footer и ввод сообщения */
 .chatbot__footer {
   padding: 0.75rem;
   position: relative;
 }
 
-/* ie11 */
-.chatbot__input::-ms-clear {
-  display: none;
-}
-
+/* Поле ввода */
 .chatbot__input {
   display: block;
   margin: 0;
@@ -274,6 +245,8 @@
   border-color: #bdbdbd;
   outline: 0;
 }
+
+/* Кнопка отправки сообщения */
 
 .chatbot__submit {
   width: 24px;

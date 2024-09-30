@@ -1,11 +1,17 @@
-/* Navigation.module.css */
+
 .navContainer {
   background-color: #282c34; 
   padding: 10px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
-  gap: 20px; 
+  position: fixed;  /* Фиксированное положение */
+  top: 0;  /* Прилепляем к верху */
+  left: 0;
+  gap: 20px;
+  width: 100%; 
+  height: 60px;  /* На всю ширину экрана */
+  z-index: 100;  /* Чтобы он был выше остальных элементов */
 }
 
 .active {
@@ -24,3 +30,10 @@
   text-decoration: underline;
   color: #61dafb; 
 }
+
+body {
+  padding-top: 0px;  /* Чтобы контент не прилипал к навбару */
+}
+
+
+
